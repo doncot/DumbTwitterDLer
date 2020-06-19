@@ -1,0 +1,20 @@
+{
+  "name": "Dumb Twitter DLer",
+  "version": "0.2",
+  "description": "A dumb image downloader for Twitter.",
+  "permissions": [
+    "contextMenus",
+    "downloads",
+    "*://twitter.com/*",
+    "activeTab",
+    "tabs"
+  ],
+  "content_scripts": [{
+    "matches": ["*://twitter.com/*"],
+    "js": ["content.js"]
+  }],
+  "background": {
+    "scripts": ["sample.js"]
+  },
+  "manifest_version": 2
+}
