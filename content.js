@@ -34,6 +34,9 @@ chrome.runtime.onMessage.addListener(
 
                     // 改行をスペースに置き換え
                     body = body.replace("\n", " ");
+
+                    // トリム
+                    body = body.trim();
                 }
                 break;
             // case 13: // 本文がない場合はここが有効に
