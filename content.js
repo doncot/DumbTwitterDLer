@@ -33,7 +33,8 @@ chrome.runtime.onMessage.addListener(
                     body = elements[i].innerHTML;
 
                     // 改行をスペースに置き換え
-                    body = body.replace("\n", " ");
+                    // 正規表現でないと全体の適用にならない
+                    body = body.replace(/\n/g, " ");
 
                     // トリム
                     body = body.trim();
