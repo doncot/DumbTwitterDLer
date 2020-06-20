@@ -9,12 +9,14 @@ function onImageClick(info, tab) {
     chrome.tabs.sendMessage(tab.id, {messageType: "single-image"}, function(response) {
         // メッセージ返し
         if(response["respondType"] == "single-image-request") {
-            // console.log("JSON: " + JSON.stringify(response.tweet));
+            console.debug("respond tweet: " + JSON.stringify(response.tweet));
+
             var user = response.tweet["user"];
             var id = response.tweet["id"];
             var body = "";
-            if(response.hasOwnProperty("body"))
+            if(response.tweet.hasOwnProperty("body")) {
                 body = response.tweet["body"];
+            }
             var date = response.tweet["date"];
 
             var extMatches = info.srcUrl.match(/\?format=([^&]+)/);
