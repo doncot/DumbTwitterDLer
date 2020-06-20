@@ -31,6 +31,9 @@ chrome.runtime.onMessage.addListener(
             case 25:
                 if(elements[i].innerHTML.search("<span class=") == -1) {
                     body = elements[i].innerHTML;
+
+                    // 改行をスペースに置き換え
+                    body = body.replace("\n", " ");
                 }
                 break;
             // case 13: // 本文がない場合はここが有効に
