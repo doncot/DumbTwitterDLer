@@ -4,7 +4,7 @@ function zeroPadding(num,length){
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        console.log("[debug] on content");
+        console.debug("on content script");
 
         // console.log("document.all[0].outerHTML = " + document.all[0].outerHTML);
         var elements = document.getElementsByClassName("css-901oao css-16my406 r-1tl8opc r-ad9z0x r-bcqeeo r-qvutc0");
@@ -30,13 +30,16 @@ chrome.runtime.onMessage.addListener(
                 break;
             case 13: // 本文がない場合はここが有効に
             case 14:
-                var results = /((\d{4})年(\d{1,2})月(\d{1,2})日)/.exec(elements[i].innerHTML);
-                if(results != null) {
-                    date = results[2] + zeroPadding(results[3], 2) + zeroPadding(results[4], 2);
+                // 既に日付が入った場合は無視する
+                if(date == "") {
+                    var results = /((\d{4})年(\d{1,2})月(\d{1,2})日)/.exec(elements[i].innerHTML);
+                    if(results != null) {
+                        date = results[2] + zeroPadding(results[3], 2) + zeroPadding(results[4], 2);
+                    }
                 }
                 break;
             }
-            // console.log(i + ": " + elements[i].innerHTML);
+            console.debug(i + ": " + elements[i].innerHTML);
         }
         var tweet = {
             "user" : user,
