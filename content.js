@@ -29,7 +29,9 @@ chrome.runtime.onMessage.addListener(
                 break;
             // case 12:
             case 25:
-                body = elements[i].innerHTML;
+                if(elements[i].innerHTML.search("<span class=") == -1) {
+                    body = elements[i].innerHTML;
+                }
                 break;
             // case 13: // 本文がない場合はここが有効に
             // case 14:
