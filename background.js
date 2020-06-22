@@ -58,5 +58,5 @@ function onImageClick(info, tab) {
 }
 
 // 処理開始
-chrome.contextMenus.create({"title": "複数画像を保存", "contexts":["page", "image"], "onclick": onPageClick});
-chrome.contextMenus.create({"title": "画像を保存（画像経由）", "contexts":["image"], "onclick": onImageClick});
+chrome.contextMenus.create({"title": "複数画像を保存", "contexts":["page", "image"], "documentUrlPatterns" : ["*://twitter.com/*"], "onclick": onPageClick});
+chrome.contextMenus.create({"title": "画像を保存（画像経由）", "contexts":["image"], "documentUrlPatterns" : ["*://twitter.com/*"], "onclick": onImageClick});
