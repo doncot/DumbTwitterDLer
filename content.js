@@ -6,7 +6,7 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         console.debug("on content script");
 
-        var elements = document.getElementsByClassName("css-901oao css-16my406 r-1tl8opc r-ad9z0x r-bcqeeo r-qvutc0");
+        var elements = document.getElementsByClassName("css-901oao css-16my406 r-1tl8opc r-bcqeeo r-qvutc0");
         
         // elements.forEach(function(e, index) {
         //     console.log(index + ': ' + e.innerHTML);
@@ -18,18 +18,21 @@ chrome.runtime.onMessage.addListener(
             var body = "";
             var date = "";
             for(let i = 0; i < elements.length; i++) {
+                console.debug(i + ": " + elements[i].innerHTML);
+
                 switch(i)
                 {
                 // case 10:
-                case 23: // 開発者ツールが有効か否かでインデックスが変わる
+                case 27: // 開発者ツールが有効か否かでインデックスが変わる
                     user = elements[i].innerHTML;
+                    user = user.replace(/\//g, '_');
                     break;
                 // case 11:
-                case 24:
+                case 28:
                     id = elements[i].innerHTML;
                     break;
                 // case 12:
-                case 25:
+                case 29:
                     if(elements[i].innerHTML.search("<span class=") == -1) {
                         body = elements[i].innerHTML;
 
@@ -37,14 +40,17 @@ chrome.runtime.onMessage.addListener(
                         // 正規表現でないと全体の適用にならない
                         body = body.replace(/\n/g, " ");
 
+                        // スラッシュ置き換え
+                        body = body.replace(/\//g, '_');
+
                         // トリム
                         body = body.trim();
                     }
                     break;
                 // case 13: // 本文がない場合はここが有効に
                 // case 14:
-                case 26:
-                case 27:
+                case 31:
+                case 32:
                     // 既に日付が入った場合は無視する
                     if(date == "") {
                         var results = /((\d{4})年(\d{1,2})月(\d{1,2})日)/.exec(elements[i].innerHTML);
@@ -54,7 +60,6 @@ chrome.runtime.onMessage.addListener(
                     }
                     break;
                 }
-                console.debug(i + ": " + elements[i].innerHTML);
             }
             var tweet = {
                 "user" : user,
@@ -72,13 +77,14 @@ chrome.runtime.onMessage.addListener(
             for(let i = 0; i < elements.length; i++) {
                 switch(i)
                 {
-                case 23: // 開発者ツールが有効か否かでインデックスが変わる
+                case 27: // 開発者ツールが有効か否かでインデックスが変わる
                     user = elements[i].innerHTML;
+                    user = user.replace(/\//g, '_');
                     break;
-                case 24:
+                case 28:
                     id = elements[i].innerHTML;
                     break;
-                case 25:
+                case 29:
                     if(elements[i].innerHTML.search("<span class=") == -1) {
                         body = elements[i].innerHTML;
 
@@ -86,12 +92,14 @@ chrome.runtime.onMessage.addListener(
                         // 正規表現でないと全体の適用にならない
                         body = body.replace(/\n/g, " ");
 
+                        // スラッシュ置き換え
+                        body = body.replace(/\//g, '_');
+
                         // トリム
                         body = body.trim();
                     }
                     break;
-                case 26:
-                case 27:
+                case 31:
                     // 既に日付が入った場合は無視する
                     if(date == "") {
                         var results = /((\d{4})年(\d{1,2})月(\d{1,2})日)/.exec(elements[i].innerHTML);
@@ -123,5 +131,7 @@ chrome.runtime.onMessage.addListener(
 
             sendResponse({respondType: "multiple-image-request", tweet: tweet});
         }
+
+        return true;
     }
 );

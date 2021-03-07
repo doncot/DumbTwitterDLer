@@ -6,6 +6,7 @@
     "contextMenus",
     "downloads",
     "*://twitter.com/*",
+    "*://pbs.twimg.com/*",
     "activeTab",
     "tabs"
   ],
