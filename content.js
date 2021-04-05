@@ -42,6 +42,8 @@ chrome.runtime.onMessage.addListener(
 
                         // スラッシュ置き換え
                         body = body.replace(/\//g, '_');
+                        // :置き換え
+                        body = body.replace(/:/g, '_');
 
                         // トリム
                         body = body.trim();
