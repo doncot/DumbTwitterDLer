@@ -24,16 +24,20 @@ chrome.runtime.onMessage.addListener(
                 {
                 // case 10:
                 case 27: // 開発者ツールが有効か否かでインデックスが変わる
+                    // ユーザー名
                     user = elements[i].innerHTML;
                     user = user.replace(/\//g, '_');
                     user = user.replace(/\*/g, '_');
+                    user = user.replace(/\|/g, '_');
                     break;
                 // case 11:
                 case 28:
+                    // ID
                     id = elements[i].innerHTML;
                     break;
                 // case 12:
                 case 29:
+                    // 本文
                     if(elements[i].innerHTML.search("<span class=") == -1) {
                         body = elements[i].innerHTML;
 
@@ -54,6 +58,7 @@ chrome.runtime.onMessage.addListener(
                 // case 14:
                 case 31:
                 case 32:
+                    // 日付
                     // 既に日付が入った場合は無視する
                     if(date == "") {
                         var results = /((\d{4})年(\d{1,2})月(\d{1,2})日)/.exec(elements[i].innerHTML);
