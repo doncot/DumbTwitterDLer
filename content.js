@@ -49,6 +49,8 @@ chrome.runtime.onMessage.addListener(
                         body = body.replace(/\//g, '_');
                         // :置き換え
                         body = body.replace(/:/g, '_');
+                        // *置き換え
+                        body = body.replace(/\*/g, '_');
 
                         // トリム
                         body = body.trim();
