@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener(
                     user = user.replace(/\//g, '_');
                     user = user.replace(/\*/g, '_');
                     user = user.replace(/\|/g, '_');
+                    user = user.replace(/\:/g, '_');
                     break;
                 // case 11:
                 case 28:
